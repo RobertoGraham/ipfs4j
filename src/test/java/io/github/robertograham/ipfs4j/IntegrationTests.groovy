@@ -1,5 +1,6 @@
 package io.github.robertograham.ipfs4j
 
+
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.spock.Testcontainers
@@ -33,9 +34,19 @@ class IntegrationTests extends Specification {
         .build())
 
     then: "the correct name is present in the add response"
-    addResponse.name == file.name
+    addResponse.name == "test.txt"
 
     cleanup:
     file.delete()
+  }
+
+  def "list available IPFS commands"() {
+    when: "a commands request is submitted"
+    final def commandsResponse = ipfs.commands(CommandsRequest.newBuilder()
+        .flags(true)
+        .build())
+
+    then: "the root command has the correct name"
+    commandsResponse.name == "ipfs"
   }
 }

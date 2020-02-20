@@ -15,7 +15,7 @@ class AddResourceImplTests extends Specification {
         .file(new File(""))
         .build()
 
-    and: "an add expected response"
+    and: "an expected add response"
     final def expectedAddResponse = AddResponse.newBuilder()
         .build()
 
