@@ -11,6 +11,8 @@ final class IpfsImpl implements Ipfs {
   private final AddResource addResource;
   @NonNull
   private final CommandsResource commandsResource;
+  @NonNull
+  private final HiddenVersionResource hiddenVersionResource;
 
   @Override
   public AddResponse add(final AddRequest addRequest) {
@@ -20,5 +22,15 @@ final class IpfsImpl implements Ipfs {
   @Override
   public CommandsResponse commands(final CommandsRequest commandsRequest) {
     return commandsResource.submit(commandsRequest);
+  }
+
+  @Override
+  public VersionResponse version(final VersionRequest versionRequest) {
+    return hiddenVersionResource.submit(versionRequest);
+  }
+
+  @Override
+  public VersionResource version() {
+    return hiddenVersionResource;
   }
 }

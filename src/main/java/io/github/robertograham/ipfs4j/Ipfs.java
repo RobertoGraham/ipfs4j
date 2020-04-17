@@ -14,10 +14,17 @@ public interface Ipfs {
         .target(AddClient.class, ipfsUrl)),
         new CommandsResourceImpl(Feign.builder()
             .decoder(jacksonDecoder)
-            .target(CommandsClient.class, ipfsUrl)));
+            .target(CommandsClient.class, ipfsUrl)),
+        new HiddenVersionResourceImpl(Feign.builder()
+            .decoder(jacksonDecoder)
+            .target(VersionClient.class, ipfsUrl)));
   }
 
   AddResponse add(AddRequest addRequest);
 
   CommandsResponse commands(CommandsRequest commandsRequest);
+
+  VersionResponse version(VersionRequest versionRequest);
+
+  VersionResource version();
 }

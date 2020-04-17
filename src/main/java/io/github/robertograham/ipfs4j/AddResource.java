@@ -1,6 +1,6 @@
 package io.github.robertograham.ipfs4j;
 
-public interface AddResource {
+interface AddResource {
 
   AddResponse submit(AddRequest addRequest);
 }

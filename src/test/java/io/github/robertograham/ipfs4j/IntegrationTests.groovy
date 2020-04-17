@@ -45,4 +45,24 @@ class IntegrationTests extends Specification {
       name == "ipfs"
     }
   }
+
+  def "get IPFS version"() {
+    expect: "the fields of the version response to be non null"
+    verifyAll(subject.version(VersionRequest.newBuilder()
+        .build())) {
+      commit
+      golang
+      repo
+      system
+      version
+    }
+  }
+
+  def "get IPFS version deps"() {
+    expect: "the correct path and version to be present in the version deps response"
+    verifyAll(subject.version().deps()) {
+      path == "github.com/ipfs/go-ipfs"
+      version == "(devel)"
+    }
+  }
 }

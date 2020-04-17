@@ -1,6 +1,6 @@
 package io.github.robertograham.ipfs4j;
 
-public interface CommandsResource {
+interface CommandsResource {
 
   CommandsResponse submit(CommandsRequest commandsRequest);
 }

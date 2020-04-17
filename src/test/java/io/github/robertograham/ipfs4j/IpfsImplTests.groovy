@@ -8,7 +8,8 @@ class IpfsImplTests extends Specification {
 
   private def addResource = Mock(AddResource)
   private def commandsResource = Mock(CommandsResource)
-  private def subject = new IpfsImpl(addResource, commandsResource)
+  private def hiddenVersionResource = Mock(HiddenVersionResource)
+  private def subject = new IpfsImpl(addResource, commandsResource, hiddenVersionResource)
 
   def "add a file to IPFS"() {
     given: "an add request"
@@ -40,5 +41,26 @@ class IpfsImplTests extends Specification {
 
     expect: "the returned commands response is as expected"
     subject.commands(commandsRequest) == expectedCommandsResponse
+  }
+
+  def "get version resource"() {
+    expect: "the returned version resource is as expected"
+    subject.version() == hiddenVersionResource
+  }
+
+  def "get IPFS version"() {
+    given: "a version request"
+    final def versionRequest = VersionRequest.newBuilder()
+        .build()
+
+    and: "a version response"
+    final def expectedVersionResponse = VersionResponse.newBuilder()
+        .build()
+
+    and: "the hidden version resource returns the version response when executed"
+    hiddenVersionResource.submit(versionRequest) >> expectedVersionResponse
+
+    expect: "the returned version response is as expected"
+    subject.version(versionRequest) == expectedVersionResponse
   }
 }
