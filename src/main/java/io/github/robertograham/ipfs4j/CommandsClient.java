@@ -5,6 +5,6 @@ import feign.RequestLine;
 
 public interface CommandsClient {
 
-  @RequestLine("GET /api/v0/commands?flags={flags}")
+  @RequestLine("POST /api/v0/commands?flags={flags}")
   CommandsResponse commands(@Param("flags") Boolean flags);
 }
