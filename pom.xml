@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>13</java.version>
-    <groovy.version>2.5.11</groovy.version>
+    <groovy.version>2.5.14</groovy.version>
     <feign.version>10.9</feign.version>
     <feign-form.version>3.8.0</feign-form.version>
     <lombok.version>1.18.12</lombok.version>
