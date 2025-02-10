@@ -8,7 +8,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>ipfs4j</name>
-  <description>IPFS API client.</description>
+  <description>IPFS API client</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
