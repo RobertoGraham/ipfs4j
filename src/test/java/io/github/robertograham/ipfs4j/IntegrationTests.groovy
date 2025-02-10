@@ -16,10 +16,10 @@ class IntegrationTests extends Specification {
   @Shared
   private GenericContainer ipfsContainer = new GenericContainer("ipfs/go-ipfs:latest")
       .withExposedPorts(5001)
-      .waitingFor(Wait.forLogMessage("Gateway \\(readonly\\) server listening on /ip4/0\\.0\\.0\\.0/tcp/8080\\n", 1))
+      .waitingFor(Wait.forLogMessage("Gateway server listening on /ip4/0\\.0\\.0\\.0/tcp/8080\\n", 1))
 
   def setup() {
-    subject = Ipfs.newIpfs("http://${ipfsContainer.containerIpAddress}:${ipfsContainer.firstMappedPort}")
+    subject = Ipfs.newIpfs("http://${ipfsContainer.host}:${ipfsContainer.firstMappedPort}")
   }
 
   def "add file to IPFS"() {
@@ -61,7 +61,7 @@ class IntegrationTests extends Specification {
   def "get IPFS version deps"() {
     expect: "the correct path and version to be present in the version deps response"
     verifyAll(subject.version().deps()) {
-      path == "github.com/ipfs/go-ipfs"
+      path == "github.com/ipfs/kubo"
       version == "(devel)"
     }
   }
